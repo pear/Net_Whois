@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
+<!-- $Id: package.xml,v 1.8 2002-09-17 17:50:37 svenasse Exp $ -->
 <package version="1.0">
   <name>Net_Whois</name>
-  <summary>The PEAR::Net_Whois class provides a tool for querying Whois Servers</summary>
-  <description>The PEAR::Net_Whois class provides a tool for querying Whois Servers</description>
+  <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
+  <description>The PEAR::Net_Whois looks up records in the databases maintained by several Network Information Centers (NICs).</description>
   <license>PHP</license>
   <maintainers>
     <maintainer>
-      <user>nohn</user>
-      <name>Sebastian Nohn</name>
-      <email>sebastian@nohn.net</email>
+      <user>svenasse</user>
+      <name>Seamus Venasse</name>
+      <email>svenasse@polaris.ca</email>
     </maintainer>
   </maintainers>
   <release>
-    <version>0.1</version>
-    <date>2001-08-22</date>
-    <state>devel</state>
+    <version>1.0</version>
+    <date>2002-09-17</date>
+    <state>stable</state>
     <notes>
       This is the initial independent release of the Net_Whois package.
     </notes>
@@ -30,3 +29,4 @@
     </deps>
   </release>
 </package>
+
