@@ -1,5 +1,5 @@
 <?php
-// $Id$
+//
 // +----------------------------------------------------------------------+
 // | PHP version 4.0                                                      |
 // +----------------------------------------------------------------------+
@@ -15,42 +15,43 @@
 // +----------------------------------------------------------------------+
 // | Authors: Sebastian Nohn <sebastian@nohn.net>                         |
 // +----------------------------------------------------------------------+
+//
+// $Id$
+//
 
 require_once 'PEAR.php';
 require_once 'Net/Socket.php';
 
 /**
- * PEAR's Net_Whois:: interface. Provides functions
- * useful for Whois-Queries.
+ * PEAR's Net_Whois:: interface.
+ *
+ * Provides functions useful for Whois-Queries.
+ *
  * @version 0.1
  * @author Sebastian Nohn <sebastian@nohn.net>
  */
-
-class Net_Whois extends PEAR {
+class Net_Whois extends PEAR
+{
 
     /**
-    * Implements Net_Whois::query() function using PEAR's socket
-    * functions
-    * 
-    * @param string  The whois-server to query
-    *
-    * @param string  The whois database object to lookup
-    *
-    * @return string The data returned from the whois-server
-    */
-    
+     * Implements Net_Whois::query() function using PEAR's socket functions
+     *
+     * @param string  The whois-server to query
+     * @param string  The whois database object to lookup
+     * @return string The data returned from the whois-server
+     */   
     function query($server, $query)
     {
         $socket = new Net_Socket;
-        $fp = $socket->connect($server, 43); 
-        if (!$fp) { 
+        $fp = $socket->connect($server, 43);         
+        if (!$fp) {
             $data = "Error connecting to $server";
         } else { 
             $query .= "\n"; 
             $socket->write($query); 
             $data = $socket->read(16384); 
             $socket->disconnect();
-        } 
+        }         
         return $data; 
     } 
 } 
