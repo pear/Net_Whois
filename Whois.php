@@ -27,8 +27,9 @@ require_once 'Net/Socket.php';
  *
  * Provides functions useful for Whois-Queries.
  *
- * @version 0.1
+ * @version $Revision$
  * @author Sebastian Nohn <sebastian@nohn.net>
+ * @package Net
  */
 class Net_Whois extends PEAR
 {
@@ -36,9 +37,9 @@ class Net_Whois extends PEAR
     /**
      * Implements Net_Whois::query() function using PEAR's socket functions
      *
-     * @param string  The whois-server to query
-     * @param string  The whois database object to lookup
-     * @return string The data returned from the whois-server
+     * @param 	string	$server The whois-server to query
+     * @param 	string  $query	The whois database object to lookup
+     * @return 	string 			The data returned from the whois-server
      */   
     function query($server, $query)
     {
