@@ -19,6 +19,7 @@
 // $Id$
 //
 
+require_once 'PEAR.php';
 require_once 'Net/Socket.php';
 
 /**
