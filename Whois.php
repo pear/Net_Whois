@@ -19,7 +19,6 @@
 // $Id$
 //
 
-require_once 'PEAR.php';
 require_once 'Net/Socket.php';
 
 /**
@@ -31,7 +30,7 @@ require_once 'Net/Socket.php';
  * @author Sebastian Nohn <sebastian@nohn.net>
  * @package Net
  */
-class Net_Whois extends PEAR
+class Net_Whois
 {
 
     /**
