@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- $Id: package.xml,v 1.8 2002-09-17 17:50:37 svenasse Exp $ -->
+<!-- $Id: package.xml,v 1.9 2003-02-06 18:09:58 svenasse Exp $ -->
 <package version="1.0">
   <name>Net_Whois</name>
   <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
@@ -8,6 +8,7 @@
   <maintainers>
     <maintainer>
       <user>svenasse</user>
+      <role>lead</role>
       <name>Seamus Venasse</name>
       <email>svenasse@polaris.ca</email>
     </maintainer>
