@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!-- do not use the "Type" attribute here, that one is only for
      generated package.xml files -->
-<Package>
-  <Name>Net_Whois</Name>
-  <Summary>The PEAR::Net_Whois class provides a tool for querying Whois Servers</Summary>
-  <Maintainer>
-    <Initials>SN</Initials>
-    <Name>Sebastian Nohn</Name>
-    <Email>sebastian@nohn.net</Email>
-  </Maintainer>
-  <Release>
-    <Version>0.1</Version>
-    <Date>2001-08-22</Date>
-    <Notes>
+<package>
+  <name>Net_Whois</name>
+  <summary>The PEAR::Net_Whois class provides a tool for querying Whois Servers</summary>
+  <maintainer>
+    <initials>SN</initials>
+    <name>Sebastian Nohn</name>
+    <email>sebastian@nohn.net</email>
+  </maintainer>
+  <release>
+    <version>0.1</version>
+    <date>2001-08-22</date>
+    <notes>
       This is the initial independent release of the Net_Whois package.
-    </Notes>
-  </Release>
-  <FileList>
-   <Dir Name="/" BaseInstallDir="Net">
-        <File Role="php">Whois.php</File>
-   </Dir>
-  </FileList>
-</Package>
+    </notes>
+  </release>
+  <filelist>
+   <dir name="/" baseinstalldir="Net">
+        <file role="php">Whois.php</file>
+   </dir>
+  </filelist>
+</package>
