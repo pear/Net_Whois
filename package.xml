@@ -7,7 +7,7 @@
   <summary>The PEAR::Net_Whois class provides a tool for querying Whois Servers</summary>
   <maintainers>
     <maintainer>
-      <user>SN</user>
+      <user>nohn</user>
       <name>Sebastian Nohn</name>
       <email>sebastian@nohn.net</email>
     </maintainer>
