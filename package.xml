@@ -17,7 +17,7 @@
     </Notes>
   </Release>
   <FileList>
-   <Dir Name="/" BaseInstallDir="Net_Whois">
+   <Dir Name="/" BaseInstallDir="Net">
         <File Role="php">Whois.php</File>
    </Dir>
   </FileList>
