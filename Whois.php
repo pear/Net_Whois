@@ -162,7 +162,7 @@ class Net_Whois extends PEAR {
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
     function queryIPv6($domain) {
-        return $this->query($domain, $thiis->_nicServers["SNICHOST"]);
+        return $this->query($domain, $this->_nicServers["SNICHOST"]);
     }
     // }}}
 
