@@ -19,6 +19,7 @@
 // $Id$
 //
 
+require_once 'PEAR.php';
 require_once 'Net/Socket.php';
 
 /**
@@ -38,14 +39,15 @@ class Net_Whois
      *
      * @param 	string	$server The whois-server to query
      * @param 	string  $query	The whois database object to lookup
-     * @return 	string 			The data returned from the whois-server
+     * @return 	mixed  			The data returned from the whois-server as string
+     *                          or a PEAR_Error ( see Net_Socket for error codes)
      */   
     function query($server, $query)
     {
         $socket = new Net_Socket;
-        $fp = $socket->connect($server, 43);         
-        if (!$fp) {
-            $data = "Error connecting to $server";
+        if( PEAR::isError( $sockerror = $socket->connect($server, 43))) {
+            $data = new PEAR_Error( "Error connecting to $server ( Net_Socket says: ".
+                                    $sockerror->getMessage().")", $sockerror->getCode());
         } else { 
             $query .= "\n"; 
             $socket->write($query); 
