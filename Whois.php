@@ -46,8 +46,6 @@ class Net_Whois extends PEAR {
     var $_nicServers = array (
         "NICHOST"           => "whois.crsnic.net",
         "INICHOST"          => "whois.networksolutions.com",
-        "NICHOST"           => "whois.crsnic.net",
-        "INICHOST"          => "whois.networksolutions.com",
         "DNICHOST"          => "whois.nic.mil",
         "GNICHOST"          => "whois.nic.gov",
         "ANICHOST"          => "whois.arin.net",
