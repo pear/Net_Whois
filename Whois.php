@@ -219,20 +219,20 @@ class Net_Whois extends PEAR {
         include_once 'Net/Socket.php';
 
         if (PEAR::isError($socket = new Net_Socket())) {
-            return new PEAR_Error($this->_errorCodes[010]);
+            return new PEAR_Error($this->_errorCodes[010], 10);
         }
         if (PEAR::isError($socket->connect($nicServer, getservbyname('whois', 'tcp')))) {
-            return new PEAR_Error($this->_errorCodes[011]);
+            return new PEAR_Error($this->_errorCodes[011], 11);
         }
         $socket->setBlocking(false);
         if (PEAR::isError($socket->writeLine($domain))) {
-            return new PEAR_Error($this->_errorCodes[012]);
+            return new PEAR_Error($this->_errorCodes[012], 12);
         }
 
         $nHost = null;
         $whoisData = $socket->readAll();
         if (PEAR::isError($whoisData)) {
-            return new PEAR_Error($this->_errorCodes[013]);
+            return new PEAR_Error($this->_errorCodes[013], 13);
         }
 
         $data = explode("\n", $whoisData);
