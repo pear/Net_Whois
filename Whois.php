@@ -245,8 +245,8 @@ class Net_Whois extends PEAR {
                     $nHost = $matches[1];
                 } elseif ($nicServer == $this->_nicServers["ANICHOST"]) {
                     foreach ($this->_ipNicServers as $ipNicServer) {
-                        if (strstr($line, $ipNicServer)) {
-                            $nHost = $ipNicServer;
+                        if (strstr($line, $this->_nicServers[$ipNicServer])) {
+                            $nHost = $this->_nicServers[$ipNicServer];
                         }
                     }
                 }
