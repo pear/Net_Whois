@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE package SYSTEM "../package.dtd">
 <!-- do not use the "Type" attribute here, that one is only for
      generated package.xml files -->
 <package version="1.0">
   <name>Net_Whois</name>
   <summary>The PEAR::Net_Whois class provides a tool for querying Whois Servers</summary>
+  <description>The PEAR::Net_Whois class provides a tool for querying Whois Servers</description>
+  <license>PHP</license>
   <maintainers>
     <maintainer>
       <user>nohn</user>
@@ -15,6 +16,7 @@
   <release>
     <version>0.1</version>
     <date>2001-08-22</date>
+    <state>devel</state>
     <notes>
       This is the initial independent release of the Net_Whois package.
     </notes>
@@ -23,5 +25,8 @@
         <file role="php">Whois.php</file>
       </dir>
     </filelist>
+    <deps>
+        <dep type="pkg" rel="has">Net_Socket</dep>
+    </deps>
   </release>
 </package>
