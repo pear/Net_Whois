@@ -222,7 +222,7 @@ class Net_Whois extends PEAR {
             return new PEAR_Error($this->_errorCodes[010], 10);
         }
         if (PEAR::isError($socket->connect($nicServer, getservbyname('whois', 'tcp')))) {
-            if (PEAR::isError($socket->connect($nicServer, getservbyname('nicname', 'tcp')))) {
+            if (PEAR::isError($socket->connect($nicServer, getservbyname('nicname', 'tcp'), false, 25))) {
                 return new PEAR_Error($this->_errorCodes[011], 11);
             }
         }
