@@ -1,39 +1,45 @@
 <?php
-//
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// | Portions Copyright (c) 1980, 1993 The Regents of the University of   |
-// |   California.  All rights reserved.                                  |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.02 of the PHP license,      |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Author: Seamus Venasse <seamus.venasse@polaris.ca>                   |
-// +----------------------------------------------------------------------+
-//
-// $Id$
-//
-// Whois Class
-//
-require_once('PEAR.php');
+/**
+ * Whois.php
+ * 
+ * PHP Version 4                                                        
+ *
+ * Copyright (c) 1997-2003 The PHP Group                               
+ * Portions Copyright (c) 1980, 1993 The Regents of the University of  
+ *   California.  All rights reserved.                                 
+ *
+ * This source file is subject to version 2.02 of the PHP license,      
+ * that is bundled with this package in the file LICENSE, and is        
+ * available at through the world-wide-web at                          
+ * http://www.php.net/license/2_02.txt.                                 
+ * If you did not receive a copy of the PHP license and are unable to   
+ * obtain it through the world-wide-web, please send a note to          
+ * license@php.net so we can mail you a copy immediately.               
+ *
+ * @category  Net
+ * @package   Net_Whois
+ * @author    Seamus Venasse <seamus.venasse@polaris.ca>
+ * @copyright 1997-2003 The PHP Group
+ * @copyright 1980-1993 The Regents of the University of California (Portions)
+ * @license   http://www.php.net/license/2_02.txt PHP 2.02
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Net_Whois
+ */
+
+require_once 'PEAR.php';
 
 /**
  * Looks up records in the databases maintained by several Network Information
  * Centres (NICs).  This class uses PEAR's Net_Socket:: class.
  *
- * @version 1.0
- * @author Seamus Venasse <seamus.venasse@polaris.ca>
- * @package Net
- * @access public
+ * @category Net
+ * @package  Net_Whois
+ * @author   Seamus Venasse <seamus.venasse@polaris.ca>
+ * @license  http://www.php.net/license/2_02.txt PHP 2.02
+ * @link     http://pear.php.net/package/Net_Whois
  */
-class Net_Whois extends PEAR {
+class Net_Whois extends PEAR
+{
 
     // {{{ properties
 
@@ -94,7 +100,8 @@ class Net_Whois extends PEAR {
      *
      * @access public
      */
-    function Net_Whois() {
+    function Net_Whois()
+    {
         $this->PEAR();
     }
     // }}}
@@ -106,12 +113,14 @@ class Net_Whois extends PEAR {
      * Add a "-arin" suffix to queries to lookup information in ARIN handle
      * database.
      *
-     * @param $domain string IP address or host name
-     * @param $userWhoisServer string server to query (optional)
+     * @param string $domain          IP address or host name
+     * @param string $userWhoisServer server to query (optional)
+     *
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function query($domain, $userWhoisServer = null) {
+    function query($domain, $userWhoisServer = null)
+    {
         $domain = trim($domain);
 
         if (isset($userWhoisServer)) {
@@ -143,11 +152,13 @@ class Net_Whois extends PEAR {
      * It contains network numbers used in East Asia, Australia, New
      * Zealand, and the Pacific islands.
      *
-     * @param $ipAddress string IP address
+     * @param string $domain IP address or host name
+     *
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function queryAPNIC($domain) {
+    function queryAPNIC($domain)
+    {
         return $this->query($domain, $this->_nicServers["PNICHOST"]);
     }
     // }}}
@@ -157,11 +168,13 @@ class Net_Whois extends PEAR {
      * Use the IPv6 Resource Center (6bone) database.  It contains network
      * names and addresses for the IPv6 network.
      *
-     * @param $domain string IP address or host name
+     * @param string $domain IP address or host name
+     *
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function queryIPv6($domain) {
+    function queryIPv6($domain) 
+    {
         return $this->query($domain, $this->_nicServers["SNICHOST"]);
     }
     // }}}
@@ -172,11 +185,13 @@ class Net_Whois extends PEAR {
      * route policy specifications for a large number of operators'
      * networks.
      *
-     * @param $ipAddress string IP address
+     * @param string $ipAddress IP address
+     *
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function queryRADB($ipAddress) {
+    function queryRADB($ipAddress) 
+    {
         return $this->query($ipAddress, $this->_nicServers["MNICHOST"]);
     }
     // }}}
@@ -185,17 +200,19 @@ class Net_Whois extends PEAR {
     /**
      * Determines the correct server to connect to based upon the domin
      *
-     * @param $domain string IP address or host name
+     * @param string $domain IP address or host name
+     *
      * @access private
      * @return string whois server host name
      */
-    function _chooseServer($domain) {
+    function _chooseServer($domain) 
+    {
         if (!strpos($domain, ".")) {
             return $this->_nicServers["NICHOST"];
         }
+ 
+        $TLD = end(explode(".", $domain));
 
-        $pieces = explode(".", $domain);
-        $TLD = $pieces[count($pieces)-1];
         if (is_numeric($TLD)) {
             $whoisServer = $this->_nicServers["ANICHOST"];
         } else {
@@ -210,19 +227,25 @@ class Net_Whois extends PEAR {
     /**
      * Connects to the whois server and retrieves domain information
      *
-     * @param $nicServer string FQDN of whois server to query
-     * @param $domain string domain name to query
+     * @param string $nicServer FQDN of whois server to query
+     * @param string $domain    Domain name to query
+     *
      * @access private
      * @return mixed returns a PEAR_Error on failure, string of whois data on success
      */
-    function _connect($nicServer, $domain) {
+    function _connect($nicServer, $domain)
+    {
         include_once 'Net/Socket.php';
 
         if (PEAR::isError($socket = new Net_Socket())) {
             return new PEAR_Error($this->_errorCodes[010], 10);
         }
-        if (PEAR::isError($socket->connect($nicServer, getservbyname('whois', 'tcp')))) {
-            if (PEAR::isError($socket->connect($nicServer, getservbyname('nicname', 'tcp'), false, 25))) {
+
+        $result = $socket->connect($nicServer, getservbyname('whois', 'tcp')));
+        if (PEAR::isError($result)) {
+            $result = $socket->connect($nicServer, getservbyname('nicname',
+                                                                 'tcp')));
+            if (PEAR::isError($result)) {
                 return new PEAR_Error($this->_errorCodes[011], 11);
             }
         }
@@ -232,6 +255,7 @@ class Net_Whois extends PEAR {
         }
 
         $nHost = null;
+
         $whoisData = $socket->readAll();
         if (PEAR::isError($whoisData)) {
             return new PEAR_Error($this->_errorCodes[013], 13);
@@ -243,7 +267,8 @@ class Net_Whois extends PEAR {
 
             // check for whois server redirection
             if (!isset($nHost)) {
-                if (preg_match("/" . $this->_whoisServerID . "(.*)/", $line, $matches)) {
+                $pattern = "/" . $this->_whoisServerID . "(.*)/";
+                if (preg_match($pattern, $line, $matches)) {
                     $nHost = $matches[1];
                 } elseif ($nicServer == $this->_nicServers["ANICHOST"]) {
                     foreach ($this->_ipNicServers as $ipNicServer) {
