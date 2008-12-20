@@ -241,10 +241,10 @@ class Net_Whois extends PEAR
             return new PEAR_Error($this->_errorCodes[010], 10);
         }
 
-        $result = $socket->connect($nicServer, getservbyname('whois', 'tcp')));
+        $result = $socket->connect($nicServer, getservbyname('whois', 'tcp'));
         if (PEAR::isError($result)) {
             $result = $socket->connect($nicServer, getservbyname('nicname',
-                                                                 'tcp')));
+                                                                 'tcp'));
             if (PEAR::isError($result)) {
                 return new PEAR_Error($this->_errorCodes[011], 11);
             }
