@@ -1,33 +1,97 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- $Id: package.xml,v 1.9 2003-02-06 18:09:58 svenasse Exp $ -->
-<package version="1.0">
-  <name>Net_Whois</name>
-  <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
-  <description>The PEAR::Net_Whois looks up records in the databases maintained by several Network Information Centers (NICs).</description>
-  <license>PHP</license>
-  <maintainers>
-    <maintainer>
-      <user>svenasse</user>
-      <role>lead</role>
-      <name>Seamus Venasse</name>
-      <email>svenasse@polaris.ca</email>
-    </maintainer>
-  </maintainers>
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Net_Whois</name>
+ <channel>pear.php.net</channel>
+ <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
+ <description>The PEAR::Net_Whois looks up records in the databases maintained by several Network Information Centers (NICs).</description>
+ <lead>
+  <name>Seamus Venasse</name>
+  <user>svenasse</user>
+  <email>svenasse@polaris.ca</email>
+  <active>yes</active>
+ </lead>
+ <date>2008-12-20</date>
+ <time>19:47:57</time>
+ <version>
+  <release>1.0.1</release>
+  <api>1.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP</license>
+ <notes>Bug #579 Net_Whois fails
+Bug #1301 Not &quot;optimized&quot; in a call to PEAR_ERROR
+Bug #1304 Syntax error in line 165
+Bug #2052 Syntax error in line 248 &amp; 249
+Bug #2053 Syntax error in line 264 	 
+Bug #4859 DB_FETCHMODE_ASSOC and CaseSensitiveField
+Bug #6348 Using = before domain name hangs ?
+Bug #14799  Improve PHPCS results</notes>
+ <contents>
+  <dir baseinstalldir="Net" name="/">
+   <file baseinstalldir="Net" md5sum="4aa1f7b1fb36049e98c1eb3d1d331207" name="tests/test.php" role="test" />
+   <file baseinstalldir="Net" md5sum="46039d4a00b89c0d23c55791ca203b47" name="tests/test2.php" role="test" />
+   <file baseinstalldir="Net" md5sum="90a7f4329228c40fa64842602495070e" name="tests/test6348.php" role="test" />
+   <file baseinstalldir="Net" md5sum="cbd1036c789dd35a28526e4e966a79c1" name="Whois.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+   <package>
+    <name>Net_Socket</name>
+    <channel>pear.php.net</channel>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <version>1.0</version>
-    <date>2002-09-17</date>
-    <state>stable</state>
-    <notes>
-      This is the initial independent release of the Net_Whois package.
-    </notes>
-    <filelist>
-      <dir name="/" baseinstalldir="Net">
-        <file role="php">Whois.php</file>
-      </dir>
-    </filelist>
-    <deps>
-        <dep type="pkg" rel="has">Net_Socket</dep>
-    </deps>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-12-20</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Bug #579 Net_Whois fails
+Bug #1301 Not &quot;optimized&quot; in a call to PEAR_ERROR
+Bug #1304 Syntax error in line 165
+Bug #2052 Syntax error in line 248 &amp; 249
+Bug #2053 Syntax error in line 264 	 
+Bug #4859 DB_FETCHMODE_ASSOC and CaseSensitiveField
+Bug #6348 Using = before domain name hangs ?
+Bug #14799  Improve PHPCS results</notes>
   </release>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-12-20</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Bug #579 Net_Whois fails
+Bug #1301 Not &quot;optimized&quot; in a call to PEAR_ERROR
+Bug #1304 Syntax error in line 165
+Bug #2052 Syntax error in line 248 &amp; 249
+Bug #2053 Syntax error in line 264 	 
+Bug #4859 DB_FETCHMODE_ASSOC and CaseSensitiveField
+Bug #6348 Using = before domain name hangs ?
+Bug #14799  Improve PHPCS results</notes>
+  </release>
+ </changelog>
 </package>
-
