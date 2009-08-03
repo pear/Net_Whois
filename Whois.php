@@ -1,20 +1,20 @@
 <?php
 /**
  * Whois.php
- * 
- * PHP Version 4                                                        
  *
- * Copyright (c) 1997-2003 The PHP Group                               
- * Portions Copyright (c) 1980, 1993 The Regents of the University of  
- *   California.  All rights reserved.                                 
+ * PHP Version 4
  *
- * This source file is subject to version 2.02 of the PHP license,      
- * that is bundled with this package in the file LICENSE, and is        
- * available at through the world-wide-web at                          
- * http://www.php.net/license/2_02.txt.                                 
- * If you did not receive a copy of the PHP license and are unable to   
- * obtain it through the world-wide-web, please send a note to          
- * license@php.net so we can mail you a copy immediately.               
+ * Copyright (c) 1997-2003 The PHP Group
+ * Portions Copyright (c) 1980, 1993 The Regents of the University of
+ *   California.  All rights reserved.
+ *
+ * This source file is subject to version 2.02 of the PHP license,
+ * that is bundled with this package in the file LICENSE, and is
+ * available at through the world-wide-web at
+ * http://www.php.net/license/2_02.txt.
+ * If you did not receive a copy of the PHP license and are unable to
+ * obtain it through the world-wide-web, please send a note to
+ * license@php.net so we can mail you a copy immediately.
  *
  * @category  Net
  * @package   Net_Whois
@@ -173,7 +173,7 @@ class Net_Whois extends PEAR
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function queryIPv6($domain) 
+    function queryIPv6($domain)
     {
         return $this->query($domain, $this->_nicServers["SNICHOST"]);
     }
@@ -190,7 +190,7 @@ class Net_Whois extends PEAR
      * @access public
      * @return mixed returns a PEAR_Error on failure, or a string on success
      */
-    function queryRADB($ipAddress) 
+    function queryRADB($ipAddress)
     {
         return $this->query($ipAddress, $this->_nicServers["MNICHOST"]);
     }
@@ -205,12 +205,12 @@ class Net_Whois extends PEAR
      * @access private
      * @return string whois server host name
      */
-    function _chooseServer($domain) 
+    function _chooseServer($domain)
     {
         if (!strpos($domain, ".")) {
             return $this->_nicServers["NICHOST"];
         }
- 
+
         $TLD = end(explode(".", $domain));
 
         if (is_numeric($TLD)) {
@@ -243,8 +243,10 @@ class Net_Whois extends PEAR
 
         $result = $socket->connect($nicServer, getservbyname('whois', 'tcp'));
         if (PEAR::isError($result)) {
-            $result = $socket->connect($nicServer, getservbyname('nicname',
-                                                                 'tcp'));
+            $result = $socket->connect(
+                $nicServer,
+                getservbyname('nicname', 'tcp')
+            );
             if (PEAR::isError($result)) {
                 return new PEAR_Error($this->_errorCodes[011], 11);
             }
