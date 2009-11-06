@@ -44,6 +44,14 @@ class Net_Whois extends PEAR
     // {{{ properties
 
     /**
+     * Retrieve authorative definition only
+     *
+     * @var boolean
+     * @access public
+     */
+    var $authorative = false;
+
+    /**
      * List of NICs to query
      *
      * @var array
@@ -103,6 +111,7 @@ class Net_Whois extends PEAR
     function Net_Whois()
     {
         $this->PEAR();
+        $this->authorative = false;
     }
     // }}}
 
@@ -140,6 +149,18 @@ class Net_Whois extends PEAR
         $whoisData = $this->_connect($whoisServer, $domain);
         if (PEAR::isError($whoisData)) {
             return $whoisData;
+        }
+
+        if (($this->authorative)
+            && (preg_match('/To single out one record/i', $whoisData))
+        ) {
+            $whoisData = $this->_connect('whois.crsnic.net', "=$domain");
+            $pos = strpos($whoisData, 'Domain Name:');
+            $chunk = substr($whoisData, $pos);
+            $matches = array();
+            preg_match('/Whois Server:(?<server>.*)/', $chunk, $matches);
+            $server = trim($matches['server']);
+            $whoisData = $this->_connect(trim($matches['server']), "$domain");
         }
 
         return $whoisData;
@@ -198,7 +219,7 @@ class Net_Whois extends PEAR
 
     // {{{ _chooseServer()
     /**
-     * Determines the correct server to connect to based upon the domin
+     * Determines the correct server to connect to based upon the domain
      *
      * @param string $domain IP address or host name
      *
