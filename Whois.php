@@ -44,12 +44,12 @@ class Net_Whois extends PEAR
     // {{{ properties
 
     /**
-     * Retrieve authorative definition only
+     * Retrieve authoritative definition only
      *
      * @var boolean
      * @access public
      */
-    var $authorative = false;
+    var $authoritative = false;
 
     /**
      * List of NICs to query
@@ -111,7 +111,7 @@ class Net_Whois extends PEAR
     function Net_Whois()
     {
         $this->PEAR();
-        $this->authorative = false;
+        $this->authoritative = false;
     }
     // }}}
 
@@ -151,7 +151,7 @@ class Net_Whois extends PEAR
             return $whoisData;
         }
 
-        if (($this->authorative)
+        if (($this->authoritative)
             && (preg_match('/To single out one record/i', $whoisData))
         ) {
             $whoisData = $this->_connect('whois.crsnic.net', "=$domain");
