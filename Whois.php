@@ -100,6 +100,14 @@ class Net_Whois extends PEAR
         012 => 'Write to socket failed',
         013 => 'Read from socket failed'
     );
+
+    /**
+     * Number of seconds to wait on socket connections before assuming
+     * there's no more data from the Whois server. Defaults to no timeout.
+     * @var integer $timeout
+     * @access private
+     */
+    var $_timeout = false;
     // }}}
 
     // {{{ constructor
@@ -112,6 +120,35 @@ class Net_Whois extends PEAR
     {
         $this->PEAR();
         $this->authoritative = false;
+        $this->_timeout = false;
+    }
+    // }}}
+
+    // {{{ setTimeout()
+    function setTimeout($timeout = false)
+    {
+        $this->_timeout = $timeout;
+    }
+    // }}}
+
+    // {{{ getTimeout()
+    function getTimeout()
+    {
+        return $this->_timeout;
+    }
+    // }}}
+
+    // {{{ setTimeout()
+    function setAuthoritative($authoritative = false)
+    {
+        $this->authoritative = $authoritative;
+    }
+    // }}}
+
+    // {{{ getAuthoritative()
+    function getAuthoritative()
+    {
+        return $this->authoritative;
     }
     // }}}
 
@@ -262,11 +299,18 @@ class Net_Whois extends PEAR
             return new PEAR_Error($this->_errorCodes[010], 10);
         }
 
-        $result = $socket->connect($nicServer, getservbyname('whois', 'tcp'));
+        $result = $socket->connect(
+            $nicServer,
+            getservbyname('whois', 'tcp'),
+            null,
+            $this->_timeout
+        );
         if (PEAR::isError($result)) {
             $result = $socket->connect(
                 $nicServer,
-                getservbyname('nicname', 'tcp')
+                getservbyname('nicname', 'tcp'),
+                null,
+                $this->timeout
             );
             if (PEAR::isError($result)) {
                 return new PEAR_Error($this->_errorCodes[011], 11);

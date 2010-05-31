@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Net_Whois</name>
  <channel>pear.php.net</channel>
  <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
@@ -16,11 +16,11 @@
   <email>ken@linux.ie</email>
   <active>yes</active>
  </lead>
- <date>2009-11-06</date>
- <time>10:42:38</time>
+ <date>2010-05-31</date>
+ <time>13:55:52</time>
  <version>
-  <release>1.0.2</release>
-  <api>3</api>
+  <release>1.0.3</release>
+  <api>1.0.3</api>
  </version>
  <stability>
   <release>stable</release>
@@ -28,16 +28,16 @@
  </stability>
  <license uri="http://www.php.net/license">PHP</license>
  <notes>
-Request #16763 authoritative info only: do not have server names included in output
+Request #17444 timeout option
  </notes>
  <contents>
   <dir baseinstalldir="Net" name="/">
    <file baseinstalldir="Net" md5sum="4aa1f7b1fb36049e98c1eb3d1d331207" name="tests/test.php" role="test" />
    <file baseinstalldir="Net" md5sum="46039d4a00b89c0d23c55791ca203b47" name="tests/test2.php" role="test" />
    <file baseinstalldir="Net" md5sum="90a7f4329228c40fa64842602495070e" name="tests/test6348.php" role="test" />
-   <file baseinstalldir="Net" md5sum="1a266e27614dd9349189655dfbcdc657" name="tests/test_authoritative.php" role="test" />
+   <file baseinstalldir="Net" md5sum="61fc68be8a6a35a2ec2bce480426d3b2" name="tests/test_authoritative.php" role="test" />
    <file baseinstalldir="Net" md5sum="a78af900380b31c5c0041acc6d9f526e" name="tests/test_mult.php" role="test" />
-   <file baseinstalldir="Net" md5sum="1a3cabbf07cbfaef5113a0704c55162a" name="Whois.php" role="php" />
+   <file baseinstalldir="Net" md5sum="c5388f5c54e750ee0f3c68e58aa95967" name="Whois.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -113,6 +113,21 @@ Bug #14799  Improve PHPCS results
    <license uri="http://www.php.net/license">PHP</license>
    <notes>
 Request #16763 authoritative info only: do not have server names included in output
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-05-31</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Request #17444 timeout option
    </notes>
   </release>
  </changelog>
