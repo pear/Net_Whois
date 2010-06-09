@@ -52,6 +52,14 @@ class Net_Whois extends PEAR
     var $authoritative = false;
 
     /**
+     * Port for whois servers
+     *
+     * @var int
+     * @access public
+     */
+    var $port = 43;
+
+    /**
      * List of NICs to query
      *
      * @var array
@@ -125,6 +133,15 @@ class Net_Whois extends PEAR
     // }}}
 
     // {{{ setTimeout()
+    /**
+     * Set timeout value - number of seconds afterwhich an attempt to connect
+     * to a whois server should be aborted.
+     *
+     * @param integer $timeout false is also an acceptable value
+     *
+     * @access public
+     * @return void
+     */
     function setTimeout($timeout = false)
     {
         $this->_timeout = $timeout;
@@ -132,6 +149,13 @@ class Net_Whois extends PEAR
     // }}}
 
     // {{{ getTimeout()
+    /**
+     * Retrieve timeout value
+     *
+     * @access public
+     *
+     * @return mixed either false or an integer value
+     */
     function getTimeout()
     {
         return $this->_timeout;
@@ -139,6 +163,14 @@ class Net_Whois extends PEAR
     // }}}
 
     // {{{ setTimeout()
+    /**
+     * setAuthoritative
+     *
+     * @param bool $authoritative defaults to false
+     *
+     * @access public
+     * @return void
+     */
     function setAuthoritative($authoritative = false)
     {
         $this->authoritative = $authoritative;
@@ -146,9 +178,41 @@ class Net_Whois extends PEAR
     // }}}
 
     // {{{ getAuthoritative()
+    /**
+     * getAuthoritative
+     *
+     * @return bool Query for authoritative result?
+     */
     function getAuthoritative()
     {
-        return $this->authoritative;
+        return (bool) $this->authoritative;
+    }
+    // }}}
+
+
+    /**
+     * set which port should be used
+     *
+     * @param integer $port Port to use
+     *
+     * @access public
+     * @return void
+     */
+    function setPort($port)
+    {
+        $this->port = $port;
+    }
+    // }}}
+
+    // {{{ getPort()
+    /**
+     * Retrieve which port to connect to.
+     *
+     * @return integer port to connect to
+     */
+    function getPort()
+    {
+        return $this->port;
     }
     // }}}
 
@@ -254,26 +318,55 @@ class Net_Whois extends PEAR
     /**
      * Determines the correct server to connect to based upon the domain
      *
-     * @param string $domain IP address or host name
+     * @param string $query IP address or host name
      *
      * @access private
      * @return string whois server host name
      */
-    function _chooseServer($domain)
+    function _chooseServer($query)
     {
-        if (!strpos($domain, '.')) {
+        if (!strpos($query, '.')) {
             return $this->_nicServers['NICHOST'];
         }
 
-        $TLD = end(explode('.', $domain));
+        $TLD = end(explode('.', $query));
 
         if (is_numeric($TLD)) {
             $whoisServer = $this->_nicServers['ANICHOST'];
         } else {
-            $whoisServer = $TLD . $this->_nicServers['QNICHOST_TAIL'];
+            $whoisServer = $this->getDomainServer($query);
         }
 
         return $whoisServer;
+    }
+    // }}}
+
+    // {{{ getDomainServer()
+    /**
+     * Determines the correct whois server to connect to based upon the domain
+     *
+     * @param string $q domain name
+     *
+     * @access public
+     * @return string whois server ip address
+     */
+    function getDomainServer($q)
+    {
+        $tail = $this->_nicServers['QNICHOST_TAIL'];
+        if (strchr($q, '.')) {
+            //get the last 2 parts
+            $q = array_reverse(explode('.', $q));
+            $a = array($q[1] . '.' . $q[0], $q[0]);
+        } else {
+            $a = array($q);
+        }
+        foreach ($a as $q) {
+            //check host has real ip
+            $q = gethostbyname($q . $tail . '.');
+            if (filter_var($q, FILTER_VALIDATE_IP)) {
+                return $q;
+            }
+        }
     }
     // }}}
 
@@ -297,20 +390,12 @@ class Net_Whois extends PEAR
 
         $result = $socket->connect(
             $nicServer,
-            getservbyname('whois', 'tcp'),
+            $this->getPort(),
             null,
-            $this->_timeout
+            $this->getTimeout()
         );
         if (PEAR::isError($result)) {
-            $result = $socket->connect(
-                $nicServer,
-                getservbyname('nicname', 'tcp'),
-                null,
-                $this->timeout
-            );
-            if (PEAR::isError($result)) {
-                return new PEAR_Error($this->_errorCodes[011], 11);
-            }
+            return new PEAR_Error($this->_errorCodes[011], 11);
         }
         $socket->setBlocking(false);
         if (PEAR::isError($socket->writeLine($domain))) {
