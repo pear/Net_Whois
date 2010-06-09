@@ -58,18 +58,18 @@ class Net_Whois extends PEAR
      * @access private
      */
     var $_nicServers = array (
-        "NICHOST"           => "whois.crsnic.net",
-        "INICHOST"          => "whois.networksolutions.com",
-        "DNICHOST"          => "whois.nic.mil",
-        "GNICHOST"          => "whois.nic.gov",
-        "ANICHOST"          => "whois.arin.net",
-        "RNICHOST"          => "whois.ripe.net",
-        "PNICHOST"          => "whois.apnic.net",
-        "RUNICHOST"         => "whois.ripn.net",
-        "MNICHOST"          => "whois.ra.net",
-        "QNICHOST_TAIL"     => ".whois-servers.net",
-        "SNICHOST"          => "whois.6bone.net",
-        "BNICHOST"          => "whois.registro.br"
+        'NICHOST'           => 'whois.crsnic.net',
+        'INICHOST'          => 'whois.networksolutions.com',
+        'DNICHOST'          => 'whois.nic.mil',
+        'GNICHOST'          => 'whois.nic.gov',
+        'ANICHOST'          => 'whois.arin.net',
+        'RNICHOST'          => 'whois.ripe.net',
+        'PNICHOST'          => 'whois.apnic.net',
+        'RUNICHOST'         => 'whois.ripn.net',
+        'MNICHOST'          => 'whois.ra.net',
+        'QNICHOST_TAIL'     => '.whois-servers.net',
+        'SNICHOST'          => 'whois.6bone.net',
+        'BNICHOST'          => 'whois.registro.br'
     );
 
     /**
@@ -78,7 +78,7 @@ class Net_Whois extends PEAR
      * @var string
      * @access private
      */
-    var $_whoisServerID = "Whois Server: ";
+    var $_whoisServerID = 'Whois Server: ';
 
     /**
      * Server to search for IP address lookups
@@ -86,7 +86,7 @@ class Net_Whois extends PEAR
      * @var array
      * @access private
      */
-    var $_ipNicServers = array ("RNICHOST", "PNICHOST", "BNICHOST");
+    var $_ipNicServers = array ('RNICHOST', 'PNICHOST', 'BNICHOST');
 
     /**
      * List of error codes and text
@@ -171,35 +171,31 @@ class Net_Whois extends PEAR
 
         if (isset($userWhoisServer)) {
             $whoisServer = $userWhoisServer;
-        } elseif (preg_match("/^!.*/", $domain)) {
-            $whoisServer = $this->_nicServers["INICHOST"];
-        } elseif (preg_match("/.*?-arin/i", $domain)) {
-            $whoisServer = $this->_nicServers["ANICHOST"];
+        } elseif (preg_match('/^!.*/', $domain)) {
+            $whoisServer = $this->_nicServers['INICHOST'];
+        } elseif (preg_match('/.*?-arin/i', $domain)) {
+            $whoisServer = $this->_nicServers['ANICHOST'];
         } elseif (preg_match('/\.gov$/i', $domain)) {
-            $whoisServer = $this->_nicServers["GNICHOST"];
+            $whoisServer = $this->_nicServers['GNICHOST'];
         } elseif (preg_match('/\.mil$/i', $domain)) {
             $whoisServer = $this->_nicServers["DNICHOST"];
         } else {
             $whoisServer = $this->_chooseServer($domain);
         }
 
-        $whoisData = $this->_connect($whoisServer, $domain);
+        $_domain = $this->authoritative ? 'domain ' . $domain : $domain;
+        $whoisData = $this->_connect($whoisServer, $_domain);
+
         if (PEAR::isError($whoisData)) {
             return $whoisData;
         }
 
-        if (($this->authoritative)
-            && (preg_match('/To single out one record/i', $whoisData))
-        ) {
-            $whoisData = $this->_connect('whois.crsnic.net', "=$domain");
-            $pos = strpos($whoisData, 'Domain Name:');
-            $chunk = substr($whoisData, $pos);
-            $matches = array();
-            preg_match('/Whois Server:(?<server>.*)/', $chunk, $matches);
-            $server = trim($matches['server']);
-            $whoisData = $this->_connect(trim($matches['server']), "$domain");
+        if ($this->authoritative) {
+            $pattern = '/\s+' . $this->_whoisServerID . '(.+?)\n/';
+            if (preg_match($pattern, $whoisData, $matches)) {
+                $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
+            }
         }
-
         return $whoisData;
     }
     // }}}
@@ -217,7 +213,7 @@ class Net_Whois extends PEAR
      */
     function queryAPNIC($domain)
     {
-        return $this->query($domain, $this->_nicServers["PNICHOST"]);
+        return $this->query($domain, $this->_nicServers['PNICHOST']);
     }
     // }}}
 
@@ -233,7 +229,7 @@ class Net_Whois extends PEAR
      */
     function queryIPv6($domain)
     {
-        return $this->query($domain, $this->_nicServers["SNICHOST"]);
+        return $this->query($domain, $this->_nicServers['SNICHOST']);
     }
     // }}}
 
@@ -250,7 +246,7 @@ class Net_Whois extends PEAR
      */
     function queryRADB($ipAddress)
     {
-        return $this->query($ipAddress, $this->_nicServers["MNICHOST"]);
+        return $this->query($ipAddress, $this->_nicServers['MNICHOST']);
     }
     // }}}
 
@@ -265,16 +261,16 @@ class Net_Whois extends PEAR
      */
     function _chooseServer($domain)
     {
-        if (!strpos($domain, ".")) {
-            return $this->_nicServers["NICHOST"];
+        if (!strpos($domain, '.')) {
+            return $this->_nicServers['NICHOST'];
         }
 
-        $TLD = end(explode(".", $domain));
+        $TLD = end(explode('.', $domain));
 
         if (is_numeric($TLD)) {
-            $whoisServer = $this->_nicServers["ANICHOST"];
+            $whoisServer = $this->_nicServers['ANICHOST'];
         } else {
-            $whoisServer = $TLD . $this->_nicServers["QNICHOST_TAIL"];
+            $whoisServer = $TLD . $this->_nicServers['QNICHOST_TAIL'];
         }
 
         return $whoisServer;
@@ -334,10 +330,10 @@ class Net_Whois extends PEAR
 
             // check for whois server redirection
             if (!isset($nHost)) {
-                $pattern = "/" . $this->_whoisServerID . "(.*)/";
+                $pattern='/'.$this->_whoisServerID.'(.*)/';
                 if (preg_match($pattern, $line, $matches)) {
                     $nHost = $matches[1];
-                } elseif ($nicServer == $this->_nicServers["ANICHOST"]) {
+                } elseif ($nicServer == $this->_nicServers['ANICHOST']) {
                     foreach ($this->_ipNicServers as $ipNicServer) {
                         if (strstr($line, $this->_nicServers[$ipNicServer])) {
                             $nHost = $this->_nicServers[$ipNicServer];
