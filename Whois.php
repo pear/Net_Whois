@@ -68,7 +68,6 @@ class Net_Whois extends PEAR
     var $_nicServers = array (
         'NICHOST'           => 'whois.crsnic.net.',
         'INICHOST'          => 'whois.networksolutions.com.',
-        'DNICHOST'          => 'whois.nic.mil.',
         'GNICHOST'          => 'whois.nic.gov.',
         'ANICHOST'          => 'whois.arin.net.',
         'RNICHOST'          => 'whois.ripe.net.',
@@ -250,8 +249,6 @@ class Net_Whois extends PEAR
             $whoisServer = $this->_nicServers['ANICHOST'];
         } elseif (preg_match('/\.gov$/i', $domain)) {
             $whoisServer = $this->_nicServers['GNICHOST'];
-        } elseif (preg_match('/\.mil$/i', $domain)) {
-            $whoisServer = $this->_nicServers["DNICHOST"];
         } else {
             $whoisServer = $this->_chooseServer($domain);
         }
@@ -268,7 +265,6 @@ class Net_Whois extends PEAR
             if (preg_match($pattern, $whoisData, $matches)) {
                 $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
             }
-            var_dump (preg_match($pattern, $whoisData, $matches)) ;
         }
         return $whoisData;
     }
