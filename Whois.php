@@ -66,18 +66,18 @@ class Net_Whois extends PEAR
      * @access private
      */
     var $_nicServers = array (
-        'NICHOST'           => 'whois.crsnic.net',
-        'INICHOST'          => 'whois.networksolutions.com',
-        'DNICHOST'          => 'whois.nic.mil',
-        'GNICHOST'          => 'whois.nic.gov',
-        'ANICHOST'          => 'whois.arin.net',
-        'RNICHOST'          => 'whois.ripe.net',
-        'PNICHOST'          => 'whois.apnic.net',
-        'RUNICHOST'         => 'whois.ripn.net',
-        'MNICHOST'          => 'whois.ra.net',
-        'QNICHOST_TAIL'     => '.whois-servers.net',
-        'SNICHOST'          => 'whois.6bone.net',
-        'BNICHOST'          => 'whois.registro.br'
+        'NICHOST'           => 'whois.crsnic.net.',
+        'INICHOST'          => 'whois.networksolutions.com.',
+        'DNICHOST'          => 'whois.nic.mil.',
+        'GNICHOST'          => 'whois.nic.gov.',
+        'ANICHOST'          => 'whois.arin.net.',
+        'RNICHOST'          => 'whois.ripe.net.',
+        'PNICHOST'          => 'whois.apnic.net.',
+        'RUNICHOST'         => 'whois.ripn.net.',
+        'MNICHOST'          => 'whois.ra.net.',
+        'QNICHOST_TAIL'     => '.whois-servers.net.',
+        'SNICHOST'          => 'whois.6bone.net.',
+        'BNICHOST'          => 'whois.registro.br.'
     );
 
     /**
@@ -264,7 +264,6 @@ class Net_Whois extends PEAR
 
         if ($this->authoritative) {
             $pattern = '/\s+' . $this->_whoisServerID . '(.+?)\n/';
-            $pattern = '/\s+Domain Name:\s*%s\s+Registrar:.*\s+Whois Server:\s*(?<server>[a-zA-Z0-9-.]+)/';
             if (preg_match($pattern, $whoisData, $matches)) {
                 $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
             }
