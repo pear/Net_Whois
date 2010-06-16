@@ -106,7 +106,8 @@ class Net_Whois extends PEAR
         010 => 'Unable to create a socket object',
         011 => 'Unable to open socket',
         012 => 'Write to socket failed',
-        013 => 'Read from socket failed'
+        013 => 'Read from socket failed',
+        014 => 'Specified server is null or empty',
     );
 
     /**
@@ -392,6 +393,10 @@ class Net_Whois extends PEAR
     function _connect($nicServer, $domain)
     {
         include_once 'Net/Socket.php';
+
+        if (is_null($nicServer) || (empty($nicServer))) {
+            return new PEAR_Error($this->_errorCodes[014], 14);
+        }
 
         if (PEAR::isError($socket = new Net_Socket())) {
             return new PEAR_Error($this->_errorCodes[010], 10);
