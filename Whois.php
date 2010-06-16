@@ -2,7 +2,7 @@
 /**
  * Whois.php
  *
- * PHP Version 4
+ * PHP Version 4 and 5
  *
  * Copyright (c) 1997-2003 The PHP Group
  * Portions Copyright (c) 1980, 1993 The Regents of the University of
@@ -127,6 +127,14 @@ class Net_Whois extends PEAR
     function Net_Whois()
     {
         $this->PEAR();
+
+        $port = getservbyname('whois', 'tcp');
+        if ($port == false) {
+            $this->port = 43;
+        } else {
+            $this->port = $port;
+        }
+
         $this->authoritative = false;
         $this->_timeout = false;
     }
@@ -256,9 +264,11 @@ class Net_Whois extends PEAR
 
         if ($this->authoritative) {
             $pattern = '/\s+' . $this->_whoisServerID . '(.+?)\n/';
+            $pattern = '/\s+Domain Name:\s*%s\s+Registrar:.*\s+Whois Server:\s*(?<server>[a-zA-Z0-9-.]+)/';
             if (preg_match($pattern, $whoisData, $matches)) {
                 $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
             }
+            var_dump (preg_match($pattern, $whoisData, $matches)) ;
         }
         return $whoisData;
     }
