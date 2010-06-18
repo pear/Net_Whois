@@ -371,7 +371,7 @@ class Net_Whois extends PEAR
         }
         foreach ($a as $q) {
             //check host has real ip
-            $q = gethostbyname($q . $tail . '.');
+            $q = gethostbyname($q . $tail);
             if (filter_var($q, FILTER_VALIDATE_IP)) {
                 return $q;
             }
