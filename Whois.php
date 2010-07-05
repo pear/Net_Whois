@@ -128,10 +128,9 @@ class Net_Whois extends PEAR
     {
         $this->PEAR();
 
+        $this->port = 43;
         $port = getservbyname('whois', 'tcp');
-        if ($port == false) {
-            $this->port = 43;
-        } else {
+        if (!$port) {
             $this->port = $port;
         }
 
