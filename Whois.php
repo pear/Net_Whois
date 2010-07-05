@@ -246,8 +246,6 @@ class Net_Whois extends PEAR
             $whoisServer = $this->_nicServers['INICHOST'];
         } elseif (preg_match('/.*?-arin/i', $domain)) {
             $whoisServer = $this->_nicServers['ANICHOST'];
-        } elseif (preg_match('/\.gov$/i', $domain)) {
-            $whoisServer = $this->_nicServers['GNICHOST'];
         } else {
             $whoisServer = $this->_chooseServer($domain);
         }
