@@ -136,14 +136,9 @@ class Net_Whois extends PEAR
     {
         $this->PEAR();
 
-        $this->port = 43;
-        $port = getservbyname('whois', 'tcp');
-        if (!$port) {
-            $this->port = $port;
-        }
-
-        $this->authoritative = false;
-        $this->_timeout = false;
+        $this->setPort();
+        $this->setAuthoritative();
+        $this->setTimeout();
     }
     // }}}
 
@@ -213,9 +208,10 @@ class Net_Whois extends PEAR
      * @access public
      * @return void
      */
-    function setPort($port)
+    function setPort($port = false)
     {
-        $this->port = $port;
+        $port = is_numeric($port) ? $port : getservbyname('whois', 'tcp');
+        $this->port = $port ? $port : 43;
     }
     // }}}
 
@@ -233,7 +229,7 @@ class Net_Whois extends PEAR
 
     function setOptions($options)
     {
-        if ((!is_null($options )) && (!is_array($options))) {
+        if ((!is_null($options)) && (!is_array($options))) {
             return;
         }
         $this->options = $options;
