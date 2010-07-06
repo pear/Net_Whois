@@ -60,6 +60,14 @@ class Net_Whois extends PEAR
     var $port = 43;
 
     /**
+     * See options for stream_context_create.
+     *
+     * @param array
+     * @access public
+     */
+    var $options = null;
+
+    /**
      * List of NICs to query
      *
      * @var array
@@ -220,6 +228,26 @@ class Net_Whois extends PEAR
     function getPort()
     {
         return $this->port;
+    }
+    // }}}
+
+    function setOptions($options)
+    {
+        if ((!is_null($options )) && (!is_array($options))) {
+            return;
+        }
+        $this->options = $options;
+    }
+
+    // {{{ getOptions()
+    /**
+     * Retrieve which port to connect to.
+     *
+     * @return array
+     */
+    function getOptions()
+    {
+        return $this->options;
     }
     // }}}
 
@@ -402,7 +430,8 @@ class Net_Whois extends PEAR
             $nicServer,
             $this->getPort(),
             null,
-            $this->getTimeout()
+            $this->getTimeout(),
+            $this->getOptions()
         );
         if (PEAR::isError($result)) {
             return new PEAR_Error($this->_errorCodes[011], 11);
