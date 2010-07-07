@@ -359,7 +359,7 @@ class Net_Whois extends PEAR
             return $this->_nicServers['NICHOST'];
         }
 
-        $TLD = end(explode('.', $query));
+        $TLD = substr($query, strrpos($domain, '.') + 1);
 
         if (is_numeric($TLD)) {
             $whoisServer = $this->_nicServers['ANICHOST'];
