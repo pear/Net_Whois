@@ -282,9 +282,7 @@ class Net_Whois extends PEAR
         }
 
         if ($this->authoritative) {
-            $pattern = '/\s+Domain Name:\s*' . strtoupper(preg_quote($domain))
-                . '\s+Registrar:.*\s+' . $this->_whoisServerID
-                . '\s*(?<server>[a-zA-Z0-9-.]+)/';
+			$pattern = '/\s+' . preg_quote($this->_whoisServerID) . '(.+?)\n/i';
 
             if (preg_match($pattern, $whoisData, $matches)) {
                 $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
