@@ -464,7 +464,7 @@ class Net_Whois extends PEAR
         // this should fail, but we'll call it anyway and ignore the error
         $socket->disconnect();
 
-        if ($nHost) {
+        if ($nHost && $nHost != $nicServer) {
             $tmpBuffer = $this->_connect($nHost, $domain);
             if (PEAR::isError($tmpBuffer)) {
                 return $tmpBuffer;
