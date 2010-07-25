@@ -26,7 +26,7 @@
   <release>stable</release>
   <api>stable</api>
  </stability>
- <license uri="http://www.php.net/license">PHP</license>
+ <license uri="http://www.php.net/license/3_01.txt">PHP</license>
  <notes>
 Request #17444 timeout option
  </notes>
