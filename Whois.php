@@ -227,6 +227,12 @@ class Net_Whois extends PEAR
     }
     // }}}
 
+    /**
+     * setOptions
+     *
+     * @param mixed $options
+     * @return void
+     */
     function setOptions($options)
     {
         if ((!is_null($options)) && (!is_array($options))) {
@@ -282,7 +288,7 @@ class Net_Whois extends PEAR
         }
 
         if ($this->authoritative) {
-			$pattern = '/\s+' . preg_quote($this->_whoisServerID) . '(.+?)\n/i';
+            $pattern = '/\s+' . preg_quote($this->_whoisServerID) . '(.+?)\n/i';
 
             if (preg_match($pattern, $whoisData, $matches)) {
                 $whoisData = $this->_connect(trim(array_pop($matches)), $domain);
@@ -453,7 +459,8 @@ class Net_Whois extends PEAR
                     $nHost = $matches[1];
                 } elseif ($nicServer == $this->_nicServers['ANICHOST']) {
                     foreach ($this->_ipNicServers as $ipNicServer) {
-                        if (strstr($line, trim($this->_nicServers[$ipNicServer],'.'))) {
+                        $server = trim($this->_nicServers[$ipNicServer], '.');
+                        if (strstr($line, $server)) {
                             $nHost = $this->_nicServers[$ipNicServer];
                         }
                     }
