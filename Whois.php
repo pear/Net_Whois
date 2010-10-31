@@ -454,7 +454,7 @@ class Net_Whois extends PEAR
 
             // check for whois server redirection
             if (!isset($nHost)) {
-                $pattern='/'.$this->_whoisServerID.'(.*)/';
+                $pattern='/'.$this->_whoisServerID.'([a-z0-9.]+)\n/i';
                 if (preg_match($pattern, $line, $matches)) {
                     $nHost = $matches[1];
                 } elseif ($nicServer == $this->_nicServers['ANICHOST']) {
