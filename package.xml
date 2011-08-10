@@ -16,10 +16,10 @@
   <email>ken@linux.ie</email>
   <active>yes</active>
  </lead>
- <date>2010-07-25</date>
+ <date>2011-08-10</date>
  <time>19:34:46</time>
  <version>
-  <release>1.0.4</release>
+  <release>1.0.5</release>
   <api>1.0.3</api>
  </version>
  <stability>
@@ -28,20 +28,8 @@
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP</license>
  <notes>
-* Fix Bug #17443: Tarball distribute files dated in 1970 [kguest]
- * Fix Bug #17476: [test.com] Undefined index:  server [kguest]
- * Fix Bug #17480: Query for co.za multiple errors [kguest]
- * Fix Bug #17493: Remove whois.nic.mil and .mil supprt [kguest]
- * Fix Bug #17496: $_nicServers should be FQDN [kguest]
- * Fix Bug #17498: PHP Version [kguest]
- * Fix Bug #17540: GNICHOST is redundant [kguest]
- * Fix Bug #17541: construct cleanup [kguest]
- * Fix Bug #17564: regex too strict for authoritative lookups [kguest]
- * Fix Bug #17569: ReferralServer support [kguest]
- * Fix Bug #17571: Fix E_STRICT error in _chooseServer [kguest]
- * Fix Bug #17614:  Notice: Undefined variable: domain in .../Whois.php on line 362 [kguest]
- * Fix Bug #17615: looping bug with domains on the &quot;whois.tucows.com&quot; whois server. [kguest]
- * Implement Feature #17449: Please, consider realising under PHP 3.01 license [kguest]
+ * Fix Bug #18005: Whois Server: not defined. [kguest]
+ * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
  </notes>
  <contents>
   <dir baseinstalldir="Net" name="/">
@@ -156,6 +144,22 @@ Request #16763 authoritative info only: do not have server names included in out
  * Fix Bug #17614:  Notice: Undefined variable: domain in .../Whois.php on line 362 [kguest]
  * Fix Bug #17615: looping bug with domains on the &quot;whois.tucows.com&quot; whois server. [kguest]
  * Implement Feature #17449: Please, consider realising under PHP 3.01 license [kguest]
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-08-10</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP</license>
+   <notes>
+ * Fix Bug #18005: Whois Server: not defined. [kguest]
+ * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
    </notes>
   </release>
  </changelog>
