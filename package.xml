@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Net_Whois</name>
+ <channel>pear.php.net</channel>
+ <summary>The PEAR::Net_Whois class provides a tool to query internet domain name and network number directory services</summary>
+ <description>The PEAR::Net_Whois looks up records in the databases maintained by several Network Information Centers (NICs).</description>
+ <lead>
+  <name>Seamus Venasse</name>
+  <user>svenasse</user>
+  <email>svenasse@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Ken Guest</name>
+  <user>kguest</user>
+  <email>ken@linux.ie</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-08-10</date>
+ <time>19:34:46</time>
+ <version>
+  <release>1.0.5</release>
+  <api>1.0.3</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.php.net/license/3_01.txt">PHP</license>
+ <notes>
+ * Fix Bug #18005: Whois Server: not defined. [kguest]
+ * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
+ </notes>
+ <contents>
+  <dir baseinstalldir="Net" name="/">
+   <file baseinstalldir="Net" md5sum="4aa1f7b1fb36049e98c1eb3d1d331207" name="tests/test.php" role="test" />
+   <file baseinstalldir="Net" md5sum="46039d4a00b89c0d23c55791ca203b47" name="tests/test2.php" role="test" />
+   <file baseinstalldir="Net" md5sum="90a7f4329228c40fa64842602495070e" name="tests/test6348.php" role="test" />
+   <file baseinstalldir="Net" md5sum="2b1be7685990f633d251a3b406b81e66" name="tests/test17476.php" role="test" />
+   <file baseinstalldir="Net" md5sum="cbc89259f855e4f8131078f7b6ff521f" name="tests/testza.php" role="test" />
+   <file baseinstalldir="Net" md5sum="61fc68be8a6a35a2ec2bce480426d3b2" name="tests/test_authoritative.php" role="test" />
+   <file baseinstalldir="Net" md5sum="a78af900380b31c5c0041acc6d9f526e" name="tests/test_mult.php" role="test" />
+   <file baseinstalldir="Net" md5sum="4b29fea53948754760a8d9071a36c1ac" name="Whois.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+   <package>
+    <name>Net_Socket</name>
+    <channel>pear.php.net</channel>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-12-20</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Bug #579 Net_Whois fails
+Bug #1301 Not &quot;optimized&quot; in a call to PEAR_ERROR
+Bug #1304 Syntax error in line 165
+Bug #2052 Syntax error in line 248 &amp; 249
+Bug #2053 Syntax error in line 264 	 
+Bug #4859 DB_FETCHMODE_ASSOC and CaseSensitiveField
+Bug #6348 Using = before domain name hangs ?
+Bug #14799  Improve PHPCS results
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-12-20</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Bug #579 Net_Whois fails
+Bug #1301 Not &quot;optimized&quot; in a call to PEAR_ERROR
+Bug #1304 Syntax error in line 165
+Bug #2052 Syntax error in line 248 &amp; 249
+Bug #2053 Syntax error in line 264 	 
+Bug #4859 DB_FETCHMODE_ASSOC and CaseSensitiveField
+Bug #6348 Using = before domain name hangs ?
+Bug #14799  Improve PHPCS results
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-11-06</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Request #16763 authoritative info only: do not have server names included in output
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-07-25</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP</license>
+   <notes>
+ * Fix Bug #17443: Tarball distribute files dated in 1970 [kguest]
+ * Fix Bug #17476: [test.com] Undefined index:  server [kguest]
+ * Fix Bug #17480: Query for co.za multiple errors [kguest]
+ * Fix Bug #17493: Remove whois.nic.mil and .mil supprt [kguest]
+ * Fix Bug #17496: $_nicServers should be FQDN [kguest]
+ * Fix Bug #17498: PHP Version [kguest]
+ * Fix Bug #17540: GNICHOST is redundant [kguest]
+ * Fix Bug #17541: construct cleanup [kguest]
+ * Fix Bug #17564: regex too strict for authoritative lookups [kguest]
+ * Fix Bug #17569: ReferralServer support [kguest]
+ * Fix Bug #17571: Fix E_STRICT error in _chooseServer [kguest]
+ * Fix Bug #17614:  Notice: Undefined variable: domain in .../Whois.php on line 362 [kguest]
+ * Fix Bug #17615: looping bug with domains on the &quot;whois.tucows.com&quot; whois server. [kguest]
+ * Implement Feature #17449: Please, consider realising under PHP 3.01 license [kguest]
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-08-10</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP</license>
+   <notes>
+ * Fix Bug #18005: Whois Server: not defined. [kguest]
+ * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
+   </notes>
+  </release>
+ </changelog>
+</package>
