@@ -437,8 +437,17 @@ class Net_Whois extends PEAR
             return new PEAR_Error($this->_errorCodes[011], 11);
         }
         $socket->setBlocking(false);
-        if (PEAR::isError($socket->writeLine($domain))) {
-            return new PEAR_Error($this->_errorCodes[012], 12);
+        // Querying denic.de requires some special coaxing for a domain query.
+        // http://www.denic.de/en/faq-single/2978/1115.html
+        if (substr($domain, -3) == '.de') {
+            if (PEAR::isError($socket->writeLine("-T dn,ace " . $domain))) {
+                return new PEAR_Error($this->_errorCodes[012], 12);
+            }
+        } else {
+
+            if (PEAR::isError($socket->writeLine($domain))) {
+                return new PEAR_Error($this->_errorCodes[012], 12);
+            }
         }
 
         $nHost = null;
