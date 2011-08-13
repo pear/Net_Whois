@@ -124,6 +124,11 @@ class Net_Whois extends PEAR
      * @access private
      */
     var $_timeout = false;
+
+	/**
+	 * Log for query. Blanked/reset for each query.
+	 */
+	var $_log = array();
     // }}}
 
     // {{{ constructor
@@ -269,6 +274,7 @@ class Net_Whois extends PEAR
      */
     function query($domain, $userWhoisServer = null)
     {
+        $this->_log = array();
         $domain = trim($domain);
 
         if (isset($userWhoisServer)) {
@@ -453,6 +459,7 @@ class Net_Whois extends PEAR
         if (PEAR::isError($data)) {
             return new PEAR_Error($this->_errorCodes[013], 13);
         }
+        $this->_log[][$server] = $data;
 
         // this should fail, but we'll call it anyway and ignore the error
         @$socket->disconnect();
@@ -515,6 +522,17 @@ class Net_Whois extends PEAR
         return $whoisData;
     }
     // }}}
+
+    // {{{ log()
+	/**
+	 * Return log for the last query
+	 *
+	 * @access public
+	 * @return array
+	 */
+    function log() {
+        return $this->_log;
+    }
+    // }}}
 }
-// vim:set noet ts=4 sw=4:
 ?>
