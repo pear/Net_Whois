@@ -1,0 +1,33 @@
+{
+    "authors": [
+        {
+            "email": "svenasse@gmail.com",
+            "name": "Seamus Venasse",
+            "role": "Lead"
+        },
+        {
+            "email": "ken@linux.ie",
+            "name": "Ken Guest",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "More info available on: http://pear.php.net/package/Net_Whois",
+    "license": "PHP",
+    "name": "pear/net_whois",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Net_Whois",
+        "source": "https://github.com/pear/Net_Whois"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
