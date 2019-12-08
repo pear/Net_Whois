@@ -16,10 +16,10 @@
   <email>ken@linux.ie</email>
   <active>yes</active>
  </lead>
- <date>2011-08-10</date>
- <time>19:34:46</time>
+ <date>2019-12-08</date>
+ <time>16:58:46</time>
  <version>
-  <release>1.0.5</release>
+  <release>1.0.6</release>
   <api>1.0.3</api>
  </version>
  <stability>
@@ -28,8 +28,7 @@
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP</license>
  <notes>
- * Fix Bug #18005: Whois Server: not defined. [kguest]
- * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
+ * Fix compatibility with PHP 7.2 [vickersa1]
  </notes>
  <contents>
   <dir baseinstalldir="Net" name="/">
@@ -160,6 +159,21 @@ Request #16763 authoritative info only: do not have server names included in out
    <notes>
  * Fix Bug #18005: Whois Server: not defined. [kguest]
  * Fix Bug #18699: Net_Whois does not return results for .de domains. [kguest]
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.6</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2019-12-08</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP</license>
+   <notes>
+ * Fix compatibility with PHP 7.2 [vickersa1]
    </notes>
   </release>
  </changelog>
