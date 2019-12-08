@@ -137,7 +137,7 @@ class Net_Whois extends PEAR
      *
      * @access public
      */
-    function Net_Whois()
+    function __construct()
     {
         $this->PEAR();
 
